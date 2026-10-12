@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cocok Tanggal Komunitas</title>
+<style>
+:root{--bg:#0a1330;--bg2:#101c44;--card:#14224f;--line:#2a3b72;--gold:#d4af37;--gold2:#f1d98a;--txt:#eef1fa;--mut:#9aa7cc;--red:#ff8a8a;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#1a2a66,var(--bg));color:var(--txt);font-family:Georgia,'Times New Roman',serif;min-height:100vh}
+.wrap{max-width:760px;margin:0 auto;padding:18px 14px 60px}
+h1{font-size:26px;margin:6px 0 2px;color:var(--gold2);letter-spacing:.5px;text-align:center}
+.sub{text-align:center;color:var(--mut);font-size:13px;margin-bottom:16px;font-family:system-ui,sans-serif}
+.tabs{display:flex;gap:6px;justify-content:center;margin-bottom:16px;font-family:system-ui,sans-serif}
+.tab{background:transparent;border:1px solid var(--line);color:var(--mut);padding:9px 16px;border-radius:999px;cursor:pointer;font-size:14px}
+.tab.on{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1500;border-color:var(--gold);font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.card h2{margin:0 0 10px;font-size:16px;color:var(--gold);font-weight:600}
+.step{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;background:var(--gold);color:#1a1500;font-size:12px;margin-right:8px;font-family:system-ui}
+input{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--txt);padding:11px 12px;border-radius:10px;font-size:15px;font-family:system-ui,sans-serif}
+input:focus{outline:none;border-color:var(--gold)}
+label{display:block;font-size:12px;color:var(--mut);margin:10px 0 4px;font-family:system-ui,sans-serif}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+@media(max-width:480px){.row{grid-template-columns:1fr}}
+.btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1500;border:0;padding:11px 18px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;font-family:system-ui,sans-serif}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--mut);font-weight:500}
+.btn.del{background:transparent;border:1px solid #7a3a4a;color:var(--red);padding:7px 12px;font-weight:500}
+.btn:disabled{opacity:.5;cursor:default}
+.ev{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;background:var(--bg2);cursor:pointer;font-family:system-ui,sans-serif}
+.ev.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.ev b{display:block;font-size:15px;font-family:Georgia,serif;color:var(--gold2)}
+.ev small{color:var(--mut)}
+.mut{color:var(--mut);font-size:13px;font-family:system-ui,sans-serif}
+.month{margin-bottom:16px}
+.month h3{margin:0 0 8px;font-size:15px;color:var(--gold2);text-align:center}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dow{text-align:center;font-size:11px;color:var(--mut);padding:2px 0;font-family:system-ui}
+.dow:first-child{color:var(--red)}
+.d{position:relative;aspect-ratio:1/1;min-height:40px;border-radius:9px;border:1px solid var(--line);background:var(--bg2);color:var(--txt);cursor:pointer;font-size:14px;font-family:system-ui,sans-serif;padding:0}
+.d.sun,.d.hol{color:var(--red)}
+.d.off{opacity:.25;cursor:default;border-style:dashed}
+.d.sel{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1a1500;border-color:var(--gold);font-weight:700}
+.d.hol::after{content:'';position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:var(--red)}
+.d .n{position:absolute;bottom:2px;left:0;right:0;font-size:9px;color:var(--gold);line-height:1}
+.d.sel .n{color:#1a1500}
+.hl{font-size:12px;color:var(--mut);margin-top:6px;font-family:system-ui}
+.hl span{color:var(--red)}
+.rank{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--bg2)}
+.medal{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#1a1500;font-size:17px}
+.m1{background:linear-gradient(135deg,#d4af37,#f6e27a)}.m2{background:linear-gradient(135deg,#aeb6c8,#e6ebf5)}.m3{background:linear-gradient(135deg,#b97a45,#e0a572)}
+.rank .t{font-size:16px;color:var(--gold2)}
+.rank .c{font-family:system-ui;font-size:13px;margin-top:3px}
+.pill{display:inline-block;background:#1d2f66;border:1px solid var(--line);border-radius:999px;padding:2px 9px;margin:3px 4px 0 0;font-size:12px;font-family:system-ui}
+.msg{padding:10px 12px;border-radius:10px;font-size:13px;margin-bottom:12px;background:#2a2410;border:1px solid var(--gold);color:var(--gold2);font-family:system-ui}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>✦ Cocok Tanggal ✦</h1>
+  <div class="sub">Temukan tanggal dengan peserta terbanyak untuk komunitas Anda</div>
+  <div id="warn" class="msg hide"></div>
+  <div class="tabs">
+    <button class="tab on" data-t="p">Peserta</button>
+    <button class="tab" data-t="r">Hasil</button>
+    <button class="tab" id="adminTab" data-t="a">Admin</button>
+  </div>
+
+  <section id="p">
+    <div class="card"><h2><span class="step">1</span>Nama Anda</h2><input id="nm" placeholder="Masukkan nama lengkap" maxlength="40"></div>
+    <div class="card"><h2><span class="step">2</span>Pilih Event</h2><div id="evlist"></div></div>
+    <div class="card hide" id="calcard"><h2><span class="step">3</span>Pilih Tanggal yang Bisa Hadir</h2>
+      <div id="mystat" class="msg hide"></div><div class="mut" id="calinfo" style="margin-bottom:10px"></div>
+      <div id="cal"></div>
+      <div style="display:flex;gap:8px;margin-top:6px"><button class="btn" id="save">Simpan Ketersediaan</button><button class="btn ghost" id="clear">Kosongkan</button></div>
+      <div class="mut" id="saved" style="margin-top:8px"></div>
+    </div>
+  </section>
+
+  <section id="r" class="hide">
+    <div class="card"><h2>Pilih Event</h2><div id="evlist2"></div></div>
+    <div class="card"><h2>🏆 3 Peringkat Teratas</h2><div id="rank"></div></div>
+  </section>
+
+  <section id="a" class="hide">
+    <div class="card" id="alogin"><h2>Login Admin</h2><label>Password admin</label><input type="password" id="ak" placeholder="Password"><div style="margin-top:12px"><button class="btn" id="login">Masuk</button> <span class="mut" id="lerr" style="color:var(--red)"></span></div></div>
+    <div id="apanel" class="hide"><div style="text-align:right;margin-bottom:8px"><button class="btn ghost" id="logout">Keluar admin</button></div>
+    <div class="card"><h2>Buat Event Baru</h2>
+      <label>Nama event</label><input id="en" placeholder="Contoh: Gathering Akhir Tahun" maxlength="60">
+      <div class="row">
+        <div><label>Dari tanggal</label><input type="date" id="es"></div>
+        <div><label>Sampai tanggal</label><input type="date" id="ee"></div>
+        <div><label>Durasi (hari)</label><input type="number" id="ed" min="1" max="30" value="1"></div>
+      </div>
+      <div class="mut" style="margin-top:8px">Durasi = berapa hari berturut-turut event berlangsung. Hasil hanya menghitung peserta yang bisa hadir di semua hari tersebut.</div>
+      <div style="margin-top:12px"><button class="btn" id="mk">Buat Event</button> <span class="mut" id="ermsg" style="color:var(--red)"></span></div>
+    </div>
+    <div class="card"><h2>Event yang Ada</h2><div id="adminlist"></div></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const BLN=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const HR=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+// Hari libur nasional & cuti bersama Indonesia 2026 (SKB 3 Menteri)
+const HOL={"2026-01-01":"Tahun Baru Masehi","2026-01-16":"Isra Mi'raj Nabi Muhammad SAW","2026-02-16":"Cuti Bersama Imlek","2026-02-17":"Tahun Baru Imlek 2577","2026-03-18":"Cuti Bersama Nyepi","2026-03-19":"Hari Raya Nyepi","2026-03-20":"Cuti Bersama Idul Fitri","2026-03-21":"Idul Fitri 1447 H","2026-03-22":"Idul Fitri 1447 H","2026-03-23":"Cuti Bersama Idul Fitri","2026-03-24":"Cuti Bersama Idul Fitri","2026-04-03":"Wafat Yesus Kristus","2026-04-05":"Paskah","2026-05-01":"Hari Buruh","2026-05-14":"Kenaikan Yesus Kristus","2026-05-15":"Cuti Bersama Kenaikan Yesus","2026-05-27":"Idul Adha 1447 H","2026-05-28":"Cuti Bersama Idul Adha","2026-05-31":"Hari Raya Waisak","2026-06-01":"Hari Lahir Pancasila","2026-06-16":"Tahun Baru Islam 1448 H","2026-08-17":"Hari Kemerdekaan RI","2026-08-25":"Maulid Nabi Muhammad SAW","2026-12-24":"Cuti Bersama Natal","2026-12-25":"Hari Raya Natal"};
+const FIX={"01-01":"Tahun Baru Masehi","05-01":"Hari Buruh","06-01":"Hari Lahir Pancasila","08-17":"Hari Kemerdekaan RI","12-25":"Hari Raya Natal"};
+const hol=i=>HOL[i]||FIX[i.slice(5)]||null;
+const pad=n=>String(n).padStart(2,'0');
+const iso=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const parse=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c)};
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const fmt=s=>{const d=parse(s);return d.getDate()+' '+BLN[d.getMonth()].slice(0,3)+' '+d.getFullYear()};
+const fmtFull=s=>{const d=parse(s);return HR[d.getDay()]+', '+fmt(s)};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const hash=s=>{let h=5381;for(const c of s)h=((h<<5)+h+c.charCodeAt(0))>>>0;return h.toString(36)};
+const $=id=>document.getElementById(id);
+
+let loaded=null,events=[],resp=[],selEv=null,picked=new Set(),isAdmin=false,armed=null,adminKey=sessionStorage.getItem('ak')||'';
+async function api(body){const r=await fetch('/api/data',{method:'POST',headers:{'Content-Type':'application/json','x-admin-key':adminKey},body:JSON.stringify(body)});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||('Error '+r.status));return j}
+async function load(){try{const r=await fetch('/api/data');const j=await r.json();if(!r.ok)throw new Error(j.error);events=(j.events||[]).sort((a,b)=>a.start.localeCompare(b.start));resp=j.responses||[];if(selEv&&!events.some(e=>e.id===selEv)){selEv=null;picked=new Set()}warn('');draw()}catch(e){warn('Gagal memuat data: '+e.message)}}
+
+function warn(t){const w=$('warn');w.textContent=t;w.classList.toggle('hide',!t)}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>show(b.dataset.t));
+function show(t){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));['p','r','a'].forEach(x=>$(x).classList.toggle('hide',x!==t));draw()}
+
+const keyOf=(ev,name)=>ev+'_'+hash(name.trim().toLowerCase());
+const myResp=()=>{const n=$('nm').value.trim();return n&&selEv?resp.find(r=>r.id===keyOf(selEv,n)):null};
+
+function evList(target,onPick){
+  const el=$(target);
+  if(!events.length){el.innerHTML='<div class="mut">Belum ada event. Admin dapat membuatnya di tab Admin.</div>';return}
+  el.innerHTML=events.map(e=>`<div class="ev ${e.id===selEv?'on':''}" data-id="${e.id}"><div><b>${esc(e.name)}</b><small>${fmt(e.start)} – ${fmt(e.end)} · ${e.days} hari</small></div><small>${resp.filter(r=>r.eventId===e.id).length} peserta</small></div>`).join('');
+  el.querySelectorAll('.ev').forEach(n=>n.onclick=()=>{selEv=n.dataset.id;const m=myResp();picked=new Set(m?m.dates:[]);loaded=m?m.id:null;$('saved').textContent='';draw()});
+}
+
+function drawCal(){
+  const ev=events.find(e=>e.id===selEv);
+  $('calcard').classList.toggle('hide',!ev);
+  if(!ev)return;
+  $('calinfo').textContent=`${ev.name} · event berlangsung ${ev.days} hari. Ketuk tanggal yang Anda bisa hadir (angka kecil = jumlah peserta lain).`;
+  const mm=myResp(),ms=$('mystat');ms.classList.toggle('hide',!mm);if(mm)ms.textContent='Anda ('+mm.name+') sudah mengisi '+mm.dates.length+' tanggal. Silakan ubah pilihan di bawah lalu tekan Perbarui. Jika ternyata tidak bisa hadir sama sekali, kosongkan semua tanggal lalu Perbarui.';$('save').textContent=mm?'Perbarui Ketersediaan':'Simpan Ketersediaan';
+  const rs=resp.filter(r=>r.eventId===ev.id&&r.id!==keyOf(ev.id,$('nm').value||'\0'));
+  const cnt={};rs.forEach(r=>r.dates.forEach(d=>cnt[d]=(cnt[d]||0)+1));
+  const s=parse(ev.start),e=parse(ev.end);let h='';
+  for(let y=s.getFullYear(),m=s.getMonth();y<e.getFullYear()||(y===e.getFullYear()&&m<=e.getMonth());){
+    const first=new Date(y,m,1),dim=new Date(y,m+1,0).getDate();
+    h+=`<div class="month"><h3>${BLN[m]} ${y}</h3><div class="grid">${HR.map(x=>`<div class="dow">${x}</div>`).join('')}${'<div></div>'.repeat(first.getDay())}`;
+    let hl=[];
+    for(let d=1;d<=dim;d++){
+      const dt=new Date(y,m,d),i=iso(dt),inr=dt>=s&&dt<=e,ho=hol(i);
+      if(ho&&inr)hl.push(`<span>${d}</span> ${esc(ho)}`);
+      h+=`<button class="d ${inr?'':'off'} ${dt.getDay()===0?'sun':''} ${ho?'hol':''} ${picked.has(i)?'sel':''}" data-d="${i}" ${inr?'':'disabled'} title="${ho?esc(ho):''}">${d}${cnt[i]?`<span class="n">${cnt[i]}</span>`:''}</button>`;
+    }
+    h+=`</div>${hl.length?`<div class="hl">${hl.join(' · ')}</div>`:''}</div>`;
+    m++;if(m>11){m=0;y++}
+  }
+  $('cal').innerHTML=h;
+  $('cal').querySelectorAll('.d:not(.off)').forEach(b=>b.onclick=()=>{const i=b.dataset.d;picked.has(i)?picked.delete(i):picked.add(i);b.classList.toggle('sel')});
+}
+
+function rankOf(ev){
+  const rs=resp.filter(r=>r.eventId===ev.id),out=[],last=parse(ev.end);
+  for(let d=parse(ev.start);;d=addD(d,1)){
+    const end=addD(d,ev.days-1);if(end>last)break;
+    const ds=[...Array(ev.days)].map((_,k)=>iso(addD(d,k)));
+    const who=rs.filter(r=>ds.every(x=>r.dates.includes(x))).map(r=>r.name);
+    if(who.length)out.push({s:iso(d),e:iso(end),who});
+  }
+  out.sort((a,b)=>b.who.length-a.who.length||a.s.localeCompare(b.s));
+  return out.slice(0,3);
+}
+function drawRank(){
+  const ev=events.find(e=>e.id===selEv),el=$('rank');
+  if(!ev){el.innerHTML='<div class="mut">Pilih event di atas.</div>';return}
+  const r=rankOf(ev),tot=resp.filter(x=>x.eventId===ev.id).length;
+  if(!r.length){el.innerHTML=`<div class="mut">Belum ada kecocokan tanggal (${tot} peserta mengisi).</div>`;return}
+  el.innerHTML=r.map((x,i)=>`<div class="rank"><div class="medal m${i+1}">${i+1}</div><div><div class="t">${ev.days>1?fmtFull(x.s)+' → '+fmtFull(x.e):fmtFull(x.s)}${hol(x.s)?' 🔴':''}</div><div class="c"><b style="color:var(--gold)">${x.who.length}</b> dari ${tot} peserta bisa hadir${ev.days===1&&hol(x.s)?` · <span style="color:var(--red)">${esc(hol(x.s))}</span>`:''}</div><div>${x.who.map(n=>`<span class="pill">${esc(n)}</span>`).join('')}</div></div></div>`).join('');
+}
+
+function drawAdmin(){
+  const el=$('adminlist');
+  if(!events.length){el.innerHTML='<div class="mut">Belum ada event.</div>';return}
+  el.innerHTML=events.map(e=>`<div class="ev" style="cursor:default"><div><b>${esc(e.name)}</b><small>${fmt(e.start)} – ${fmt(e.end)} · ${e.days} hari · ${resp.filter(r=>r.eventId===e.id).length} peserta</small></div><button class="btn del" data-id="${e.id}">${armed===e.id?'Yakin hapus?':'Hapus'}</button></div>`).join('');
+  el.querySelectorAll('.del').forEach(b=>b.onclick=async()=>{
+    const id=b.dataset.id;
+    if(armed!==id){armed=id;drawAdmin();return}
+    armed=null;
+    try{
+      await api({action:'deleteEvent',id});if(selEv===id){selEv=null;picked=new Set()}await load();
+    }catch(err){warn('Gagal menghapus: '+(err.message||err.code))}
+  });
+}
+function draw(){evList('evlist');evList('evlist2');drawCal();drawRank();if(isAdmin)drawAdmin()}
+
+$('nm').oninput=()=>{const m=myResp();if(m&&loaded!==m.id){picked=new Set(m.dates);loaded=m.id}else if(!m)loaded=null;drawCal()};
+$('clear').onclick=()=>{picked=new Set();drawCal()};
+$('save').onclick=async()=>{
+  const n=$('nm').value.trim();
+  if(!n){$('saved').textContent='Isi nama Anda terlebih dahulu (langkah 1).';return}
+  try{
+    await api({action:'save',eventId:selEv,id:keyOf(selEv,n),name:n,dates:[...picked].sort()});await load();
+    $('saved').textContent=picked.size?'✓ Tersimpan. Terima kasih, '+n+'!':'✓ Tersimpan: Anda tidak bisa hadir di tanggal mana pun.';loaded=keyOf(selEv,n);
+    setTimeout(()=>show('r'),700);
+  }catch(err){$('saved').textContent='Gagal menyimpan: '+(err.message||err.code)}
+};
+$('mk').onclick=async()=>{
+  const n=$('en').value.trim(),s=$('es').value,e=$('ee').value,d=Math.max(1,parseInt($('ed').value)||1),er=$('ermsg');
+  er.textContent='';
+  if(!n||!s||!e){er.textContent='Lengkapi nama dan tanggal.';return}
+  if(e<s){er.textContent='Tanggal akhir harus setelah tanggal mulai.';return}
+  if((parse(e)-parse(s))/864e5+1<d){er.textContent='Durasi lebih panjang dari rentang tanggal.';return}
+  try{
+    await api({action:'createEvent',name:n,start:s,end:e,days:d});await load();
+    $('en').value='';$('es').value='';$('ee').value='';$('ed').value=1;
+  }catch(err){er.textContent='Gagal membuat event: '+(err.message||err.code)}
+};
+
+function setAdmin(v){isAdmin=v;$('alogin').classList.toggle('hide',v);$('apanel').classList.toggle('hide',!v);if(v)drawAdmin()}
+$('login').onclick=async()=>{adminKey=$('ak').value;try{await api({action:'login'});sessionStorage.setItem('ak',adminKey);$('lerr').textContent='';setAdmin(true)}catch(e){adminKey='';$('lerr').textContent='Password salah.'}};
+$('logout').onclick=()=>{adminKey='';sessionStorage.removeItem('ak');setAdmin(false)};
+(async()=>{draw();await load();setInterval(load,15000);if(adminKey){try{await api({action:'login'});setAdmin(true)}catch(e){adminKey='';sessionStorage.removeItem('ak');setAdmin(false)}}})();
+</script>
+</body>
+</html>
