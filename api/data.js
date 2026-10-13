@@ -1,14 +1,15 @@
 const { Redis } = require('@upstash/redis');
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN,
-});
+const pick = re => { const k = Object.keys(process.env).find(k => re.test(k) && !/READ_ONLY/.test(k) && process.env[k]); return k ? process.env[k] : undefined; };
+const url = pick(/(REST_API_URL|REST_URL)$/);
+const token = pick(/(REST_API_TOKEN|REST_TOKEN)$/);
+const redis = url && token ? new Redis({ url, token }) : null;
 const isDate = s => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
 const days = (a, b) => Math.round((new Date(b) - new Date(a)) / 864e5) + 1;
 
 module.exports = async (req, res) => {
   try {
     res.setHeader('Cache-Control', 'no-store');
+    if (!redis) return res.status(500).json({ error: 'Database belum terhubung (variabel Upstash tidak ditemukan)' });
     if (req.method === 'GET') {
       const events = Object.values((await redis.hgetall('events')) || {});
       const responses = [];
